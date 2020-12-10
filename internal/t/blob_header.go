@@ -16,10 +16,9 @@ const (
 	blobHeaderDataSize = 3
 )
 
-// TODO: Assess making this return a BlobHeader and remove *BlobHeader from the code
-func (pbr *PBReader) ReadBlobHeader(buf []byte, bh *BlobHeader) {
-	next := 0
-	for next < len(buf) {
+func (pbr *PBReader) ReadBlobHeader(buf []byte) BlobHeader {
+	var bh BlobHeader
+	for next := 0; next < len(buf); {
 		id := pb.DecodeVarInt(buf, &next)
 		switch id {
 		case pb.MakeIdType(blobHeaderType, pb.PbFixedBytes): // Type
@@ -30,6 +29,7 @@ func (pbr *PBReader) ReadBlobHeader(buf []byte, bh *BlobHeader) {
 			panic(fmt.Sprintf("BlobHeader: Unknown: %d (id=%d / t=%d)", id, id>>3, id&7))
 		}
 	}
+	return bh
 }
 
 func (bh *BlobHeader) Write(buf []byte) []byte {

@@ -109,8 +109,7 @@ func (pfs *ProcessFileState) processFileWork(
 		blobHeaderSize := uint64(binary.BigEndian.Uint32(inputBuffer[pfs.at:]))
 		atomic.AddUint64(&pfs.at, 4)
 
-		var bh t.BlobHeader
-		pbr.ReadBlobHeader(inputBuffer[pfs.at:pfs.at+blobHeaderSize], &bh)
+		bh := pbr.ReadBlobHeader(inputBuffer[pfs.at : pfs.at+blobHeaderSize])
 		atomic.AddUint64(&pfs.at, blobHeaderSize)
 
 		if bh.Type != "OSMHeader" && bh.Type != "OSMData" {
