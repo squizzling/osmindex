@@ -170,7 +170,12 @@ func (tf *TagFilterer) Worker() pbf.WorkFunc {
 			sw.AddDropped(localDropped)
 
 			if len(nodes)+len(pendingNodes) > nodesToBuffer || len(ws) > 0 || len(rs) > 0 {
-				pbOut := t.MakePrimitiveBlock(pendingNodes, ws, rs)
+				var pbOut *t.PrimitiveBlock
+				if nodesToBuffer == 0 {
+					pbOut = t.MakePrimitiveBlock(nodes, ws, rs)
+				} else {
+					pbOut = t.MakePrimitiveBlock(pendingNodes, ws, rs)
+				}
 
 				sw.SetCurrentState(state.WorkerEncoding)
 				outputData := (&t.Blob{RawFunc: pbOut.Write}).Write(make([]byte, 0, 2*1048576))
@@ -180,7 +185,9 @@ func (tf *TagFilterer) Worker() pbf.WorkFunc {
 					BlobType: "OSMData",
 				})
 
-				pendingNodes = nodes
+				if nodesToBuffer > 0 {
+					pendingNodes = nodes
+				}
 			} else {
 				pendingNodes = append(pendingNodes, nodes...)
 				sendFiller(sw, outBlocks, data.Index)
