@@ -25,8 +25,7 @@ type DenseNodes struct {
 }
 
 func ReadDenseNodes(buf []byte, dn *DenseNodes) {
-	next := 0
-	for next < len(buf) {
+	for next := 0; next < len(buf); {
 		id := pb.DecodeVarInt(buf, &next)
 		switch id {
 		case pb.MakeIdType(denseNodesId, pb.PbFixedBytes):

@@ -20,8 +20,7 @@ type Way struct {
 	ID   WayId    // 1
 	Keys []uint32 // 2, packed
 	Vals []uint32 // 3, packed
-	//Info *Info    // 4
-	Refs []int64 // 8, sint, packed, delta
+	Refs []int64  // 8, sint, packed, delta
 }
 
 func (pbr *PBReader) ReadWay(buf []byte, w *Way) {
