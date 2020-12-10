@@ -33,12 +33,12 @@ Each element is 16 bytes:
 -- The high 40 bits defines the offset in to the location data (part 3)
 -- The low 24 bits defines the count
 
-The IDs must be in ascending order, however this is not enforced and lookup will fail if they are not.  The `.osm.pbf` source data must be in ascending order. 
+The IDs must be in ascending order, however this is not enforced and lookup will fail if they are not.  The `.osm.pbf` source data must be in ascending order.
 
 ### Part 3 (locations)
 Each location is either `0`, or a Morton location.  There is no varint encoding, each location is 64 bits.
 
-`0` indicates that the node was not present in the source `.osm.pbf`, and allows for there to be less index elements, at the expense of more locations. 
+`0` indicates that the node was not present in the source `.osm.pbf`, and allows for there to be less index elements, at the expense of more locations.
 
 ## Possible enhancements
 
@@ -54,7 +54,7 @@ The idea of `offset` referring to a larger block is how we encode the `.relidx`,
 ### varint delta encoding blocks
 By varint delta encoding blocks, we may be able to trade decoding time for better memory usage.
 
-### Copying less data 
+### Copying less data
 Swapping index elements and locations would make it much faster to generate the index, as we generate them both in parallel and then copy the locations to the end of the index elements
 
 # `.wayidx` encoding
@@ -66,7 +66,7 @@ Swapping index elements and locations would make it much faster to generate the 
 ## Part 2 (index data)
 - 8 bytes of ID and offset
 
-The top 31 bits define the Way ID, the bottom 33 bits define the block offset.  The block offset is the number of blocks in to the location blocks to find the start of the location data. 
+The top 31 bits define the Way ID, the bottom 33 bits define the block offset.  The block offset is the number of blocks in to the location blocks to find the start of the location data.
 
 This encoding only allows for a maximum Way ID of approximately 2 billion, at present the maximum is around 844 million, or 40%.
 
@@ -78,7 +78,7 @@ Each location block is:
 
 The maximum number of bytes in the entire location block section is 2**(33 + alignmentShift).
 
-With no padding, up to 8GB of location data can be encoded.  With 0-7 byte padding (the default), up to 68GB of location data can be encoded.  This is sufficient for `planet`.  
+With no padding, up to 8GB of location data can be encoded.  With 0-7 byte padding (the default), up to 68GB of location data can be encoded.  This is sufficient for `planet`.
 
 ## Possible enhancements
 
@@ -88,10 +88,10 @@ The header has plenty of free space, and a version number should be used.
 ### Location blocks first
 Putting the location blocks ahead of the index data would make index generation faster.
 
-### Different bit allocations for id / offset 
+### Different bit allocations for id / offset
 The ID needs to fit the maximum way ID, however the offset could be changed to require only the count of ways by making the block size large enough to fit the way with the most locations in it.  The current split allows for smaller files at the expense of tighter limits.
 
-The largest way is 2000 entries  
+The largest way is 2000 entries.
 
 # `.relidx` encoding
 A sequence of RelationIndex.
@@ -103,7 +103,7 @@ Each RelationIndex is:
 
 Each WayIndex is:
 - 64bit LocationCount (may be 0)
-- Sequence of 64bit Morton encoded Locations, counted by LocationCount 
+- Sequence of 64bit Morton encoded Locations, counted by LocationCount
 
 This is output in the order it appears in the file, which is the order osm2pgsql will process the relations.  Some relations will be filtered by osm2pgsq, but are still present in the `.relidx`, so osm2pgsql will need to scan forward until it finds a match.  There is no encoding to reduce the file size, because it reduces the complexity of code in osm2pgsql.
 
