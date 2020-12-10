@@ -1,0 +1,15 @@
+/vendor/
+/.idea/
+/*.pprof
+
+/blockcount
+/decompress
+/dumpnodeindex
+/dumpwayindex
+/entitycount
+/entityfind
+/nodeindex
+/relindex
+/rewritenodes
+/tagfilter
+/wayindex
