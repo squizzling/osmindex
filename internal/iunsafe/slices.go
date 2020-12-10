@@ -13,7 +13,7 @@ type sliceHeader struct {
 
 type interfaceHeader struct {
 	Table unsafe.Pointer
-	Data unsafe.Pointer
+	Data  unsafe.Pointer
 }
 
 func ByteSliceAsInt64Slice(i []byte) []int64 {

@@ -7,12 +7,12 @@ import (
 )
 
 type BlobHeader struct {
-	Type      string // 1, required
-	DataSize  int32  // 3, required
+	Type     string // 1, required
+	DataSize int32  // 3, required
 }
 
 const (
-	blobHeaderType = 1
+	blobHeaderType     = 1
 	blobHeaderDataSize = 3
 )
 
@@ -27,7 +27,7 @@ func (pbr *PBReader) ReadBlobHeader(buf []byte, bh *BlobHeader) {
 		case pb.MakeIdType(blobHeaderDataSize, pb.PbVarInt): // DataSize
 			bh.DataSize = pb.DecodeI32(buf, &next)
 		default:
-			panic(fmt.Sprintf("BlobHeader: Unknown: %d (id=%d / t=%d)", id, id >> 3, id & 7))
+			panic(fmt.Sprintf("BlobHeader: Unknown: %d (id=%d / t=%d)", id, id>>3, id&7))
 		}
 	}
 }

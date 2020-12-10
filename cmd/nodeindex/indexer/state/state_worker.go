@@ -12,8 +12,8 @@ const (
 )
 
 type Worker struct {
-	currentState  uint64
-	currentBlock  uint64
+	currentState uint64
+	currentBlock uint64
 }
 
 func (w *Worker) CurrentState() uint64 {

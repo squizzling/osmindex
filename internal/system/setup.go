@@ -38,4 +38,3 @@ func Setup(opts *SystemOpts) func() {
 		}
 	}
 }
-

@@ -115,8 +115,8 @@ func (idx *NodeIndex) PrintStats() {
 			fmt.Printf(
 				"time: %d %.0f-%.0f = %d\n",
 				i,
-				(math.Pow(idx.divFactor, float64(i))) / cyclesPerNS,
-				(math.Pow(idx.divFactor, float64(i+1))) / cyclesPerNS,
+				(math.Pow(idx.divFactor, float64(i)))/cyclesPerNS,
+				(math.Pow(idx.divFactor, float64(i+1)))/cyclesPerNS,
 				count,
 			)
 		}

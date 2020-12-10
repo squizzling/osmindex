@@ -14,7 +14,6 @@ const (
 	WriterWriting
 )
 
-
 func (w *Writer) CurrentState() uint64 {
 	return atomic.LoadUint64(&w.currentState)
 }

@@ -29,5 +29,3 @@ func reorder(inBlocks <-chan Block, outBlocks chan<- Block, wg *sync.WaitGroup) 
 	}
 	wg.Done()
 }
-
-

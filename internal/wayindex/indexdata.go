@@ -22,5 +22,5 @@ func MakeIndexData(wayID int64, offset int64) WayIndexData {
 	if offset > (1 << 33) {
 		panic(fmt.Sprintf("offset too large: %d\n", offset))
 	}
-	return WayIndexData(wayID << 33 | offset)
+	return WayIndexData(wayID<<33 | offset)
 }

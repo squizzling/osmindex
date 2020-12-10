@@ -50,7 +50,7 @@ func main() {
 				var extract, search uint64
 				if opts.PrintLocations {
 
-					extract = uint64(si.Location(element.Offset()+idx))
+					extract = uint64(si.Location(element.Offset() + idx))
 					if extract == 0 {
 						fmt.Printf("Extract: skip\n")
 					} else {

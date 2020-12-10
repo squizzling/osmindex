@@ -77,6 +77,6 @@ func (rs Relations) ToPrimitiveBlock(stb *stringTableBuilder) *PrimitiveGroup {
 		})
 	}
 	return &PrimitiveGroup{
-		Relations:  nrs,
+		Relations: nrs,
 	}
 }

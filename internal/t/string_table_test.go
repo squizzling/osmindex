@@ -54,4 +54,3 @@ func TestStringTableWrite(t *testing.T) {
 		t.Fatal("encode data mismatch")
 	}
 }
-

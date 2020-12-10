@@ -6,7 +6,6 @@ func EncodeIdVarInt(buf []byte, id uint64, v uint64) []byte {
 	return buf
 }
 
-
 func EncodeVarInt(b []byte, v uint64) []byte {
 	//if len(b) + 16 > cap(b) {
 	//	panic(fmt.Sprintf("len=%d, cap=%d", len(b), cap(b)))

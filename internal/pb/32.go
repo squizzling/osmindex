@@ -23,18 +23,18 @@ func DecodeS32Packed(buf []byte, next *int) []int32 {
 	return output[:idx]
 }
 
-func EncodeS32PackedDelta(buf[] byte, values []int32) []byte {
+func EncodeS32PackedDelta(buf []byte, values []int32) []byte {
 	last := int32(0)
 	var innerBuf []byte
 	for _, value := range values {
-		innerBuf = EncodeVarInt(innerBuf, EncodeZigZag(int64(value - last)))
+		innerBuf = EncodeVarInt(innerBuf, EncodeZigZag(int64(value-last)))
 		last = value
 	}
 	buf = EncodeBuffer(buf, innerBuf)
 	return buf
 }
 
-func EncodeS32Packed(buf[] byte, values []int32) []byte {
+func EncodeS32Packed(buf []byte, values []int32) []byte {
 	var innerBuf []byte
 	for _, value := range values {
 		innerBuf = EncodeVarInt(innerBuf, EncodeZigZag(int64(value)))
@@ -42,7 +42,6 @@ func EncodeS32Packed(buf[] byte, values []int32) []byte {
 	buf = EncodeBuffer(buf, innerBuf)
 	return buf
 }
-
 
 func DecodeI32Packed(buf []byte, next *int) []int32 {
 	innerBuf := DecodeBytes(buf, next)
@@ -55,7 +54,7 @@ func DecodeI32Packed(buf []byte, next *int) []int32 {
 	return output[:idx]
 }
 
-func EncodeI32Packed(buf[] byte, values []int32) []byte {
+func EncodeI32Packed(buf []byte, values []int32) []byte {
 	var innerBuf []byte
 	for _, value := range values {
 		innerBuf = EncodeVarInt(innerBuf, uint64(value))
@@ -64,7 +63,7 @@ func EncodeI32Packed(buf[] byte, values []int32) []byte {
 	return buf
 }
 
-func EncodeI32PackedFunc(values []int32) func (buf []byte) []byte {
+func EncodeI32PackedFunc(values []int32) func(buf []byte) []byte {
 	return func(buf []byte) []byte {
 		for _, value := range values {
 			buf = EncodeVarInt(buf, uint64(value))

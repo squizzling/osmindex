@@ -140,7 +140,6 @@ func main() {
 		passTimes = append(passTimes, time.Since(passStartTime))
 	}
 
-
 	ix.Close()
 	ix.PrintStats()
 	for idx, passRunTime := range passTimes {

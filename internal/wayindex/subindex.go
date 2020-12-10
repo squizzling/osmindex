@@ -47,7 +47,7 @@ func (si *SubWayIndex) findLocationsActual(id int64, hint int) ([]int64, int, bo
 		} else if id == wid {
 			lowerPoint = midPoint
 			break
-		}  else if id > wid {
+		} else if id > wid {
 			lowerPoint = midPoint + 1
 		}
 	}
@@ -58,7 +58,7 @@ func (si *SubWayIndex) findLocationsActual(id int64, hint int) ([]int64, int, bo
 	}
 
 	atomic.AddUint64(&si.parent.HitDefault, 1)
-	rawLocationBytes := si.Loc[si.Ids[lowerPoint].Offset() << si.parent.AlignmentShift:]
+	rawLocationBytes := si.Loc[si.Ids[lowerPoint].Offset()<<si.parent.AlignmentShift:]
 	return pb.DecodeS64PackedDeltaZero(rawLocationBytes), lowerPoint, true
 }
 
@@ -73,7 +73,7 @@ func (si *SubWayIndex) FindLocations(id int64, hint int) ([]int64, int, bool) {
 	l, h, ok := si.findLocationsActual(id, hint)
 	end := gotsc.BenchEnd()
 	delta := float64(int64((end - start) - overhead))
-	if delta > 1 && delta < 2 * cpuFreq {
+	if delta > 1 && delta < 2*cpuFreq {
 		// A page fault should be serviced in under 2 seconds, so if the delta is higher then it's likely a core
 		// jump with a different timestamp, rather than a slow page fault.
 		i := 0

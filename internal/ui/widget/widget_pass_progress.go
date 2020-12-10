@@ -21,9 +21,9 @@ type PassProgress struct {
 
 func NewPassProgress(pass, count uint64, pfs *pbf.ProcessFileState) views.Widget {
 	pp := &PassProgress{
-		pass:             pass,
-		count:            count,
-		pfs:              pfs,
+		pass:  pass,
+		count: count,
+		pfs:   pfs,
 	}
 	pp.WidgetCommonLine = NewWidgetCommonLine(pp.update)
 	return pp

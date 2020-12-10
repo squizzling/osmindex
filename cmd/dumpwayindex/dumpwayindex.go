@@ -26,7 +26,7 @@ func main() {
 
 	for _, data := range ix.Ids {
 		if opts.PrintLocations {
-			printBytes := ix.Loc[data.Offset() << ix.AlignmentShift:]
+			printBytes := ix.Loc[data.Offset()<<ix.AlignmentShift:]
 			printLocs := pb.DecodeS64PackedDeltaZero(printBytes)
 			fmt.Printf("%d %v\n", data.WayID(), printLocs)
 		}

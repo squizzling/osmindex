@@ -1,11 +1,11 @@
 package nodeindex
 
 const (
-	CountBits = 24
-	CountMax = 1 << CountBits
-	CountMask = CountMax - 1
+	CountBits  = 24
+	CountMax   = 1 << CountBits
+	CountMask  = CountMax - 1
 	OffsetBits = 64 - CountBits
-	OffsetMax = 1 << OffsetBits
+	OffsetMax  = 1 << OffsetBits
 )
 
 type CountOffset uint64

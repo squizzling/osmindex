@@ -64,8 +64,8 @@ func (ri *RelIndexerInitializer) Worker() func(ctx context.Context, chIn <-chan 
 			}
 
 			msg := pbf.Block{
-				Index: data.Index,
-				Data: outputData,
+				Index:    data.Index,
+				Data:     outputData,
 				BlobType: "RelationData",
 			}
 

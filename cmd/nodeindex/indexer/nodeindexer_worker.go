@@ -76,7 +76,7 @@ func (ni *NodeIndexer) Worker(ctx context.Context, chIn <-chan pbf.Block, chOut 
 
 				lat := int32((pb.LatOffset + (int64(pb.Granularity) * pg.Dense.Lat[idx])) / 100)
 				lon := int32((pb.LonOffset + (int64(pb.Granularity) * pg.Dense.Lon[idx])) / 100)
-				outputLoc = append(outputLoc, int64(morton.Encode(lon, lat | math.MinInt32)))
+				outputLoc = append(outputLoc, int64(morton.Encode(lon, lat|math.MinInt32)))
 			}
 		}
 

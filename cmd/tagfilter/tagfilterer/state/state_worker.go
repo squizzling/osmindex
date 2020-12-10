@@ -18,6 +18,7 @@ type Worker struct {
 	kept         uint64
 	dropped      uint64
 }
+
 func (w *Worker) CurrentState() uint64 {
 	return atomic.LoadUint64(&w.currentState)
 }

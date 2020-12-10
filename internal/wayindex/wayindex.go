@@ -73,14 +73,14 @@ func (idx *WayIndex) SubIndexWithScaledPass(curPass int, countPass int) *SubWayI
 
 	endIndex := len(subIds)
 	for i := 0; i < len(subIds); i++ {
-		if subIds[i].Offset() << idx.AlignmentShift >= startTarget {
+		if subIds[i].Offset()<<idx.AlignmentShift >= startTarget {
 			startIndex = i
 			break
 		}
 	}
 
 	for i := startIndex; i < len(subIds); i++ {
-		if subIds[i].Offset() << idx.AlignmentShift  >= endTarget {
+		if subIds[i].Offset()<<idx.AlignmentShift >= endTarget {
 			endIndex = i
 			break
 		}

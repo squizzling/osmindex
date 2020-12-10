@@ -85,7 +85,7 @@ func (si *NodeSubIndex) FindNode(id uint64, hint int) (int64, int, bool) {
 	l, h, ok := si.findNodeActual(id, hint)
 	end := gotsc.BenchEnd()
 	delta := float64(int64((end - start) - overhead))
-	if delta > 1 && delta < 2 * cpuFreq {
+	if delta > 1 && delta < 2*cpuFreq {
 		// A page fault should be serviced in under 2 seconds, so if the delta is higher then it's likely a core
 		// jump with a different timestamp, rather than a slow page fault.
 		i := 0
