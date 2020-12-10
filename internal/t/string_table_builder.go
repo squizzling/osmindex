@@ -83,5 +83,20 @@ func (stb *stringTableBuilder) ToKeyVals(m map[string]string) ([]uint32, []uint3
 		vs = append(vs, stb.GetIndex(m[k]))
 	}
 	return ks, vs
+}
 
+func (stb *stringTableBuilder) ToKeyValLinear(m map[string]string) []int32 {
+	ids := make([]int32, 0, len(m)*2)
+
+	sortedKeys := make([]string, 0, len(m))
+	for k, _ := range m {
+		sortedKeys = append(sortedKeys, k)
+	}
+	sort.Strings(sortedKeys)
+
+	for _, k := range sortedKeys {
+		ids = append(ids, int32(stb.GetIndex(k)))
+		ids = append(ids, int32(stb.GetIndex(m[k])))
+	}
+	return ids
 }

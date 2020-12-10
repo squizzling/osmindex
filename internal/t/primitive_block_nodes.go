@@ -47,15 +47,12 @@ func (ns Nodes) ToPrimitiveGroup(stb *stringTableBuilder) *PrimitiveGroup {
 	dn.Id = make([]int64, 0, len(ns))
 	dn.Lat = make([]int64, 0, len(ns))
 	dn.Lon = make([]int64, 0, len(ns))
-	dn.KeyVals = make([]int32, 0)
 
 	for _, n := range ns {
 		dn.Id = append(dn.Id, int64(n.Id))
 		dn.Lat = append(dn.Lat, n.Lat/100)
 		dn.Lon = append(dn.Lon, n.Lon/100)
-		for k, v := range n.Tags {
-			dn.KeyVals = append(dn.KeyVals, int32(stb.GetIndex(k)), int32(stb.GetIndex(v)))
-		}
+		dn.KeyVals = append(dn.KeyVals, stb.ToKeyValLinear(n.Tags)...)
 		dn.KeyVals = append(dn.KeyVals, 0)
 	}
 
